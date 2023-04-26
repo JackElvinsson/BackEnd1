@@ -2,9 +2,7 @@ package com.example.backend1.Controllers;
 
 import com.example.backend1.Models.Item;
 import com.example.backend1.Repositories.ItemRepo;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,11 @@ public class ItemController {
     @RequestMapping("items/{id}")
     public Item getItemById(@PathVariable long id) {
         return itemRepo.findById(id).orElseThrow(() -> new RuntimeException("No matching item found for id:" + id));
+    }
+
+    @PostMapping("items/add")
+    public String addItem(@RequestBody Item item) {
+        itemRepo.save(item);
+        return "The following item was added: " + item.getName() + ", price: " + item.getPrice();
     }
 }

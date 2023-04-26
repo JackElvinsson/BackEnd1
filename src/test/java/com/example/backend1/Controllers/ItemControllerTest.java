@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 
@@ -16,6 +19,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -59,4 +63,12 @@ public class ItemControllerTest {
                 .andExpect(content().json("{\"id\": 1,\"name\": \"Shoe\",\"price\": 130.5}"));
     }
 
+    @Test
+    void addItem() throws Exception {
+        this.mockMvc.perform(post("/items/add")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\": 1,\"name\":\"Shoe\",\"price\":1500}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("The following item was added: Shoe, price: 1500")));
+    }
 }

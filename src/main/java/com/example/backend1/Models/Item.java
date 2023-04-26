@@ -21,7 +21,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private long id;
     private String name;
     private float price;
 }
