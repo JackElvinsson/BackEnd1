@@ -2,9 +2,7 @@ package com.example.backend1.Controllers;
 
 import com.example.backend1.Models.Customer;
 import com.example.backend1.Repositories.CustomerRepo;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,12 @@ public class CustomerController {
     @RequestMapping("customers/{id}")
     public Customer findCustomerById(@PathVariable Long id){
         return customerRepo.findById(id).orElse(null);
+    }
+
+
+    @PostMapping("customers/add")
+    public String addCustomerByPost(@RequestBody Customer customer){
+        customerRepo.save(customer);
+        return "Added customer: "+customer.getName()+", "+customer.getSsn();
     }
 }

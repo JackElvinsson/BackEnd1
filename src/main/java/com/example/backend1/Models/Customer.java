@@ -18,6 +18,14 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String name;
+    private String ssn;
+/*
+    public Customer(String name, String ssn) {
+        this.name = name;
+        this.ssn = ssn;
+    }
+
+ */
 
     @OneToMany
     @JoinTable
