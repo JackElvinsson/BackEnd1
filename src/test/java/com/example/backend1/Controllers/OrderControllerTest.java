@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,8 +38,6 @@ class OrderControllerTest {
     @MockBean
     private OrderRepo orderRepository;
 
-    @MockBean
-    private CustomerRepo customerRepository;
 
     @BeforeEach
     public void init() {
@@ -58,72 +57,28 @@ class OrderControllerTest {
         when(orderRepository.findByCustomerId(1L)).thenReturn(List.of(o1));
         when(orderRepository.findByCustomerId(2L)).thenReturn(List.of(o2));
         when(orderRepository.findByCustomerId(3L)).thenReturn(List.of(o3));
+
+
     }
 
-  /* plockar ut datum och namn från order */
+
     @Test
     public void getAllOrdersTest() throws Exception {
         this.mockMvc.perform(get("/orders"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("01-01-01")))
-                .andExpect(content().string(containsString("02-02-02")))
-                .andExpect(content().string(containsString("03-03-03")))
-                .andExpect(content().string(containsString("Test Testsson")))
-                .andExpect(content().string(containsString("Test Testberg")))
-                .andExpect(content().string(containsString("Test Testman")))
-                .andExpect(content().string(containsString("900110")))
-                .andExpect(content().string(containsString("800615")))
-                .andExpect(content().string(containsString("701013")));
-
+                .andExpect(content().json("[{\"id\":4,\"date\":\"2020-01-01\",\"itemList\":[]},{\"id\":5,\"date\":\"2021-02-02\",\"itemList\":[]},{\"id\":6,\"date\":\"2022-03-03\",\"itemList\":[]}]"));
     }
-
-    /* plockar ut datum och namn från order med jsonPath */
-//    @Test
-//    public void getAllOrdersTest() throws Exception {
-//        this.mockMvc.perform(get("/orders"))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$[0].id").value(4))
-//                .andExpect(jsonPath("$[0].date").value("01-01-01"))
-//                .andExpect(jsonPath("$[0].customer.name").value("Test Testsson"))
-//                .andExpect(jsonPath("$[0].customer.ssn").value("900110"))
-//                .andExpect(jsonPath("$[1].id").value(5))
-//                .andExpect(jsonPath("$[1].date").value("02-02-02"))
-//                .andExpect(jsonPath("$[1].customer.name").value("Test Testberg"))
-//                .andExpect(jsonPath("$[1].customer.ssn").value("800615"))
-//                .andExpect(jsonPath("$[2].id").value(6))
-//                .andExpect(jsonPath("$[2].date").value("03-03-03"))
-//                .andExpect(jsonPath("$[2].customer.name").value("Test Testman"))
-//                .andExpect(jsonPath("$[2].customer.ssn").value("701013"));
-//    }
-
-    /* Plockar ut datum och namn från order med jsonPath och assertThat genom att skapa en lista med alla
-       förväntade strängar och sedan loopa igenom listan och kolla att varje sträng finns med i content() */
-//    @Test
-//    public void getAllOrdersTest() throws Exception {
-//        List<String> expectedStrings = Arrays.asList(
-//                "01-01-01", "02-02-02", "03-03-03",
-//                "Test Testsson", "Test Testberg", "Test Testman",
-//                "900110", "800615", "701013"
-//        );
-//
-//        String content = this.mockMvc.perform(get("/orders"))
-//                .andExpect(status().isOk())
-//                .andReturn()
-//                .getResponse()
-//                .getContentAsString();
-//
-//        for (String expectedString : expectedStrings) {
-//            assertThat(content).contains(expectedString);
-//        }
-//    }
 
 
     @Test
     public void findOrderByCustomerIdTest() throws Exception {
         // .param("customerId", "1") is the same as /orders?customerId=1
         this.mockMvc.perform(get("/orders").param("customerId", "1"))
+
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value(4));
+                .andExpect(content().json("[{\"id\":4,\"date\":\"2020-01-01\",\"itemList\":[]}]"));
+
     }
+
 
 }
