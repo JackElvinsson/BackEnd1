@@ -31,7 +31,6 @@ public class OrderController {
 
     @RequestMapping("orders/{customerId}")
     public List<Order> getOrdersByCustomerId(@PathVariable Long customerId) {
-        System.out.println("Customer ID: " + customerId);
         List<Order> orders = orderRepository.findByCustomerId(customerId);
         if (orders.isEmpty()) {
             throw new RuntimeException("No matching orders found for customer id: " + customerId);
