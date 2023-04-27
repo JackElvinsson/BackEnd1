@@ -1,11 +1,13 @@
 package com.example.backend1.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,25 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "purchase_order")
 public class Order {
-    public Order(String date, Customer customer) {
-        this.date = date;
-        this.customer = customer;
-    }
-
-    public Order(String date, Customer customer, List<Item> itemList) {
-        this.date = date;
-        this.customer = customer;
-        this.itemList = itemList;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-
-    private String date;
+    private long id;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
 
     @ManyToMany
@@ -43,4 +35,25 @@ public class Order {
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     private List<Item> itemList = new ArrayList<>();
+
+    public Order(Customer customer) {
+        this.customer = customer;
+        this.date = LocalDate.now();
+    }
+
+    public Order(long id, Customer customer, LocalDate date) {
+        this.id=id;
+        this.customer = customer;
+        this.date = date;
+    }
+
+    public Order(Customer customer, List<Item> itemList) {
+        this.customer = customer;
+        this.itemList = itemList;
+        this.date = LocalDate.now();
+    }
+
+    public void addItem(Item item) {
+        itemList.add(item);
+    }
 }

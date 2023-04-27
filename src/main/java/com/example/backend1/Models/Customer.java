@@ -1,5 +1,6 @@
 package com.example.backend1.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -30,8 +31,6 @@ public class Customer {
     private Long Id;
     private String name;
     private String ssn;
-
-
 
     @OneToMany(mappedBy = "customer")
     private List<Order> orderList = new ArrayList<>();

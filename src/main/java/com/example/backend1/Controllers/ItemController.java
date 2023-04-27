@@ -1,7 +1,9 @@
 package com.example.backend1.Controllers;
 
 import com.example.backend1.Models.Item;
+import com.example.backend1.Repositories.CustomerRepo;
 import com.example.backend1.Repositories.ItemRepo;
+import com.example.backend1.Repositories.OrderRepo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +12,13 @@ import java.util.List;
 public class ItemController {
 
     private final ItemRepo itemRepo;
+    private final CustomerRepo customerRepo;
+    private final OrderRepo orderRepo;
 
-    public ItemController(ItemRepo itemRepo) {
+    public ItemController(ItemRepo itemRepo, CustomerRepo customerRepo, OrderRepo orderRepo) {
         this.itemRepo=itemRepo;
+        this.customerRepo=customerRepo;
+        this.orderRepo=orderRepo;
     }
 
     @RequestMapping("items")

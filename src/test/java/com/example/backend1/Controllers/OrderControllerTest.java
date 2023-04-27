@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -44,9 +45,9 @@ class OrderControllerTest {
         Customer c2 = new Customer(2L, "Test Testberg", "800615", null);
         Customer c3 = new Customer(3L, "Test Testman", "701013", null);
 
-        Order o1 = new Order(4L, "01-01-01", c1, null);
-        Order o2 = new Order(5L, "02-02-02", c2, null);
-        Order o3 = new Order(6L, "03-03-03", c3, null);
+        Order o1 = new Order(4L, c1, LocalDate.of(2020, 1,1));
+        Order o2 = new Order(5L, c2, LocalDate.of(2021, 2,2));
+        Order o3 = new Order(6L, c3, LocalDate.of(2022, 3,3));
 
         when(orderRepository.findById(4L)).thenReturn(Optional.of(o1));
         when(orderRepository.findById(5L)).thenReturn(Optional.of(o2));
