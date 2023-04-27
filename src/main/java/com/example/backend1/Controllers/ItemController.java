@@ -43,19 +43,25 @@ public class ItemController {
 
 
     @PostMapping("items/buy")
-    public Order createPurchase(@RequestParam Long customerId, @RequestParam Long itemId) {
-        System.out.println("customerId = " + customerId);
-        System.out.println("itemId = " + itemId);
+    public String createPurchase(@RequestParam Long customerId, @RequestParam Long itemId) {
+
         // Fetch the customer and item based on their ids
         try {
+            if (customerRepo.findById(customerId).isPresent() && itemRepo.findById(itemId).isPresent()) {
+
             Customer customer = customerRepo.findById(customerId)
                     .orElseThrow(() -> new RuntimeException("Customer with id " + customerId + " not found"));
             Item item = itemRepo.findById(itemId)
                     .orElseThrow(() -> new RuntimeException("Item with id " + itemId + " not found"));
-
             Order order = new Order(customer, Collections.singletonList(item));
 
-            return orderRepo.save(order);
+            orderRepo.save(order);
+            return "The following order was created: " + item.getName() + ", price: " + item.getPrice() + " | Customer: " + customer.getName() + ", ssn: " + customer.getSsn() + "";
+
+            } else {
+                return "Customer or item not found";
+            }
+
         } catch (Exception e) {
             System.out.println("PARSE ERROR");
             return null;
@@ -63,7 +69,7 @@ public class ItemController {
     }
 
 
-    /* Samma som ovan fast med ResponseEntity */
+    /* Same as above but with ResponseEntity */
 //    @PostMapping("items/buy")
 //    public ResponseEntity<Order> createPurchase(@RequestParam Long customerId, @RequestParam Long itemId) {
 //        System.out.println("customerId = " + customerId);
