@@ -72,12 +72,9 @@ class OrderControllerTest {
 
     @Test
     public void findOrderByCustomerIdTest() throws Exception {
-        // .param("customerId", "1") is the same as /orders?customerId=1
-        this.mockMvc.perform(get("/orders").param("customerId", "1"))
-
+        this.mockMvc.perform(get("/orders/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{\"id\":4,\"date\":\"2020-01-01\",\"itemList\":[]}]"));
-
     }
 
 
