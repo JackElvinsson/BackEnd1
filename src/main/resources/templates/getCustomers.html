@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Customers</title>
+</head>
+<body>
+<h1>All customers</h1>
+
+<div class="allCustomers" th:unless="${#lists.isEmpty(allCustomers)}">
+    <table>
+        <th th:text="${customerName}"></th>
+        <th th:text="${customerSsn}"></th>
+        <tbody>
+        <tr th:each="customer : ${allCustomers}">
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.ssn}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
