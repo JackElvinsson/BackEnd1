@@ -45,7 +45,6 @@ public class ItemController {
         }
     }
 
-
     @PostMapping("items/buy")
     public Order createPurchase(@RequestParam Long customerId, @RequestParam Long itemId) {
         System.out.println("customerId = " + customerId);
