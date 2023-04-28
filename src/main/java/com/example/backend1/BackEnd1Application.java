@@ -18,7 +18,7 @@ public class BackEnd1Application {
         SpringApplication.run(BackEnd1Application.class, args);
     }
 
-/*
+
     @Bean
     public CommandLineRunner clr(ItemRepo itemRepo, CustomerRepo customerRepo, OrderRepo orderRepo) {
         return (args) -> {
@@ -53,5 +53,5 @@ public class BackEnd1Application {
         };
     }
 
- */
+
 }
