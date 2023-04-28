@@ -2,6 +2,7 @@ package com.example.backend1.Controllers;
 
 import com.example.backend1.Models.Customer;
 import com.example.backend1.Repositories.CustomerRepo;
+import com.example.backend1.Repositories.OrderRepo;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,9 @@ class CustomerControllerTest {
 
     @MockBean
     private CustomerRepo customerRepo;
+
+    @MockBean
+    private OrderRepo orderRepo;
 
     @BeforeEach
     public void init() {

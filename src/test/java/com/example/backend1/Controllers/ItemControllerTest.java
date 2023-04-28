@@ -5,6 +5,7 @@ import com.example.backend1.Models.Item;
 import com.example.backend1.Models.Order;
 import com.example.backend1.Repositories.CustomerRepo;
 import com.example.backend1.Repositories.ItemRepo;
+import com.example.backend1.Repositories.OrderRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class ItemControllerTest {
 
     @MockBean
     private CustomerRepo customerRepo;
+
+    @MockBean
+    private OrderRepo orderRepo;
 
     @BeforeEach
     public void init() {
