@@ -37,10 +37,13 @@ public class ItemController {
 
     @PostMapping("items/add")
     public String addItem(@RequestBody Item item) {
-        itemRepo.save(item);
-        return "The following item was added: " + item.getName() + ", price: " + item.getPrice();
+        if (item.getPrice() > 0 && item.getName() != null && !item.getName().isBlank()) {
+            itemRepo.save(item);
+            return "The following item was added: " + item.getName() + ", price: " + item.getPrice();
+        } else {
+            return "Could not add item";
+        }
     }
-
 
     @PostMapping("items/buy")
     public String createPurchase(@RequestParam Long customerId, @RequestParam Long itemId) {
