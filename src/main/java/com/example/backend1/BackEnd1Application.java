@@ -21,6 +21,7 @@ public class BackEnd1Application {
     @Bean
     public CommandLineRunner clr(ItemRepo itemRepo, CustomerRepo customerRepo, OrderRepo orderRepo) {
         return (args) -> {
+
             Customer c1 = new Customer("Emma", "123456");
             Customer c2 = new Customer("Jack", "345676");
             Customer c3 = new Customer("Thomas", "456767");
@@ -46,6 +47,7 @@ public class BackEnd1Application {
             o4.addItem(i4); o3.addItem(i1);
 
             orderRepo.save(o1); orderRepo.save(o2); orderRepo.save(o3); orderRepo.save(o4);
+
 
         };
     }

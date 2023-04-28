@@ -12,25 +12,33 @@ public class CustomerController {
     private final CustomerRepo customerRepo;
 
 
-    CustomerController(CustomerRepo customerRepo){
+    CustomerController(CustomerRepo customerRepo) {
         this.customerRepo = customerRepo;
 
     }
 
     @RequestMapping("customers")
-    public List<Customer> getAllCustomters(){
+    public List<Customer> getAllCustomters() {
         return customerRepo.findAll();
     }
 
     @RequestMapping("customers/{id}")
-    public Customer findCustomerById(@PathVariable Long id){
+    public Customer findCustomerById(@PathVariable Long id) {
         return customerRepo.findById(id).orElse(null);
     }
 
 
     @PostMapping("customers/add")
-    public String addCustomerByPost(@RequestBody Customer customer){
+    public String addCustomerByPost(@RequestBody Customer customer) {
+
+        if (customer.getSsn() == null) {
+            return "invalid ssn";
+        }
+        if (customer.getName() == null) {
+            return "invalid name";
+        }
+
         customerRepo.save(customer);
-        return "Added customer: "+customer.getName()+", "+customer.getSsn();
+        return "Added customer: " + customer.getName() + ", " + customer.getSsn();
     }
 }
