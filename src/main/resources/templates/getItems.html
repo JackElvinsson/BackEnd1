@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All items</title>
+</head>
+<body>
+<h1 th:text="${itemTitle}"></h1>
+<div class="allItems" th:unless="${#lists.isEmpty(allItems)}">
+    <table>
+        <thead>
+        <tr>
+            <th th:text="${itemName}"></th>
+            <th th:text="${itemPrice}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${allItems}">
+            <td th:text="${item.name}"></td>
+            <td th:text="${item.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
