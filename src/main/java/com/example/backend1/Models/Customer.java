@@ -14,10 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class Customer {
 
-    public Customer(String name, List<Order> orderList) {
+    /*public Customer(String name, List<Order> orderList) {
         this.name = name;
         this.orderList = orderList;
-    }
+    }*/
 
     public Customer(String name, String ssn) {
         this.name = name;
@@ -30,6 +30,6 @@ public class Customer {
     private String name;
     private String ssn;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Order> orderList = new ArrayList<>();
+ //   @OneToMany(mappedBy = "customer")
+  //  private List<Order> orderList = new ArrayList<>();
 }

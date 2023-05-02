@@ -35,9 +35,9 @@ class OrderControllerTest {
 
     @BeforeEach
     public void init() {
-        Customer c1 = new Customer(1L, "Test Testsson", "900110", null);
-        Customer c2 = new Customer(2L, "Test Testberg", "800615", null);
-        Customer c3 = new Customer(3L, "Test Testman", "701013", null);
+        Customer c1 = new Customer(1L, "Test Testsson", "900110");
+        Customer c2 = new Customer(2L, "Test Testberg", "800615");
+        Customer c3 = new Customer(3L, "Test Testman", "701013");
 
         Order o1 = new Order(4L, c1, LocalDate.of(2020, 1,1));
         Order o2 = new Order(5L, c2, LocalDate.of(2021, 2,2));
