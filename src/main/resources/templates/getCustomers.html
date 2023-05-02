@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>All Customers</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<h1>All customers</h1>
 
-<div class="allCustomers" th:unless="${#lists.isEmpty(allCustomers)}">
-    <table>
-        <th th:text="${customerName}"></th>
-        <th th:text="${customerSsn}"></th>
-        <tbody>
-        <tr th:each="customer : ${allCustomers}">
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.ssn}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <h1 class="text-center">All customers</h1>
+    <div class="allCustomers" th:unless="${#lists.isEmpty(allCustomers)}">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th th:text="${customerName}"></th>
+                <th th:text="${customerSsn}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer : ${allCustomers}">
+                <td th:text="${customer.name}"></td>
+                <td th:text="${customer.ssn}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 </body>
 </html>

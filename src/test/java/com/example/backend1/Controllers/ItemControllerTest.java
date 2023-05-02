@@ -49,8 +49,8 @@ public class ItemControllerTest {
         Item i2 = new Item(2L,"Book", 200);
         Item i3 = new Item(3L,"Game Boy", 999);
 
-        Customer c2 = new Customer(1L,"John", "345676", null);
-        Customer c1 = new Customer(2L,"Jane", "123456", null);
+        Customer c2 = new Customer(1L,"John", "345676");
+        Customer c1 = new Customer(2L,"Jane", "123456");
 
         when(itemRepo.findAll()).thenReturn(Arrays.asList(i1, i2, i3));
         when(itemRepo.findById(1L)).thenReturn(Optional.of(i1));
