@@ -11,13 +11,16 @@
 </div>
 <div class="container w-25">
 
-<form action="/customers/addByFormReceival" method="post">
-    <label for="customerName">Full name:</label>
-    <input type="text" id="customerName" name="customerName" value="" class="form-control">
-    <label for="SSN">SSN: </label>
-    <input type ="text" id="SSN" name="SSN" value="" class="form-control">
-    <input type="submit" value="Submit" class="btn btn-dark mt-3">
-</form>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <form action="/customers/addByFormReceival" method="post">
+        <label for="customerName">Full name:</label>
+        <input type="text" id="customerName" name="customerName" value="" class="form-control">
+        <label for="SSN">SSN: </label>
+        <input type ="text" id="SSN" name="SSN" value="" class="form-control">
+        <input type="submit" value="Submit" class="btn btn-dark mt-3">
+    </form>
 </div>
 </body>
 </html>
