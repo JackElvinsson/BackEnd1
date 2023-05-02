@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Customer</title>
+</head>
+<body>
+<h1>Add Customer</h1>
+<form action="/customers/addByFormReceival" method="post">
+    <label for="customerName">Full name:</label><br>
+    <input type="text" id="customerName" name="customerName" value=""><br>
+    <label for="SSN">SSN: </label> <br>
+    <input type ="text" id="SSN" name="SSN" value=""><br><br>
+    <input type="submit" value="submit">
+</form>
+
+</body>
+</html>
