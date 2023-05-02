@@ -9,7 +9,7 @@
     <div class="container p-4">
         <h1 class="text-center" th:text="${itemTitle}"></h1>
     </div>
-    <div class="allItems container" th:unless="${#lists.isEmpty(allItems)}">
+    <div class="allItems container w-50" th:unless="${#lists.isEmpty(allItems)}">
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
             <tr>
